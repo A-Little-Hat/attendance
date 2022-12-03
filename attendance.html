@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<title>College Attendance</title>
+<script>
+
+
+function myFunction(e){
+  var x = e.style.backgroundColor;
+  if(x == "rgb(102, 204, 255)"){
+   e.style.backgroundColor="DeepPink";
+   e.style.color="#ffffff";
+  }
+  else{
+   e.style.backgroundColor="rgb(102, 204, 255)";
+   e.style.color="#000000";
+  }
+}
+
+function my(){
+  var x = document.querySelectorAll("div.it");
+  var i,k=document.getElementById("myDIV2").rows;
+  var v = document.getElementById("myDIV2").innerHTML;
+  for(i=0;i<x.length;i++){
+    var t = x[i].style.backgroundColor;
+     if(t == "deeppink"){
+       x[i].style.backgroundColor="rgb(102, 204, 255)";
+       x[i].style.color="#ffffff";
+       var nm = x[i].innerHTML;
+       if(v.search(nm) == -1 ){
+         v=v+"\n"+x[i].innerHTML;
+         k++;
+       }
+     }
+     
+    document.getElementById("myDIV2").rows=k;
+    document.getElementById("myDIV2").innerHTML =v;
+    
+  }
+}
+
+function mycopy(){
+    var copyText = document.getElementById("myDIV2");
+     copyText.select();
+     copyText.setSelectionRange(0, 99999);
+     document.execCommand("copy");
+} 
+
+const getExcel = ()=>{
+  var copyText = document.getElementById("myDIV2").innerHTML;
+  var detailsArray = copyText.split('\n');
+  if(detailsArray.length>1){
+    var csv = detailsArray.map(function(d){
+      return JSON.stringify(d);
+    }).join('\n').replace(/(^\[)|(\]$)/mg, '');
+    const data = encodeURI('data:text/csv;charset=utf-8,' + csv);
+    const link = document.createElement('a');
+    link.setAttribute('href', data);
+    link.setAttribute('download', 'Attendance.csv');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }else{
+    alert("Please select student and create list.")
+  }
+}
+
+function myclear(){
+   document.getElementById("myDIV2").innerHTML="Today's Attendance";
+   document.getElementById("myDIV2").rows="2";
+} 
+
+function reset(){
+    var x = document.getElementById("myDIV").querySelectorAll("div.it");
+    var i;
+    for(i=0;i<35;i++){
+      var t = x[i].style.backgroundColor;
+       if(t != "#000000"){
+          x[i].style.backgroundColor="rgb(102, 204, 255)";
+          x[i].style.color="#000000";
+       }
+    }
+  }
+
+</script>
+<style>
+
+.it{
+display:block;
+padding:12px;
+width:90%;
+border-radius:7px;
+text-align: center;
+user-select: none;
+margin: 0 auto;
+margin-bottom:5px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="myDIV">
+<div class="it" style="background-color:rgb(102, 204, 255);" onclick="myFunction(this)" >1 Akshay Kumar Das</div>
+<div class="it" style="background-color:rgb(102, 204, 255);" onclick="myFunction(this)" >2 Aniket Sarkar</div>
+<div class="it" style="background-color:rgb(102, 204, 255);" onclick="myFunction(this)" >3 Aniket Chatterjeee</div>
+<div class="it" style="background-color:rgb(102, 204, 255);" onclick="myFunction(this)" >4 Aniket Pal</div>
+<div class="it" style="background-color:rgb(102, 204, 255);" onclick="myFunction(this)" >5 Arijit Bose</div>
+<div class="it" style="background-color:rgb(102, 204, 255);" onclick="myFunction(this)" >6 Arunava Das</div>
+<div class="it" style="background-color:rgb(102, 204, 255);" onclick="myFunction(this)" >7 Baishakhi Boral</div>
+<div class="it" style="background-color:rgb(102, 204, 255);" onclick="myFunction(this)" >8 Barsha Manna</div>
+<div class="it" style="background-color:rgb(102, 204, 255);" onclick="myFunction(this)" >9 Bishal Ghosh</div>
+<div class="it" style="background-color:rgb(102, 204, 255);" onclick="myFunction(this)" >10 Biswayan Nandi</div>
+<div class="it" style="background-color:rgb(102, 204, 255);" onclick="myFunction(this)" >11 Pallavi Paul</div>
+<div class="it" style="background-color:rgb(102, 204, 255);" onclick="myFunction(this)" >12 Pritam Sarkar</div>
+<div class="it" style="background-color:rgb(102, 204, 255);" onclick="myFunction(this)" >13 Puja Das</div>
+<div class="it" style="background-color:rgb(102, 204, 255);" onclick="myFunction(this)" >14 </div>
+<div class="it" style="background-color:rgb(102, 204, 255);" onclick="myFunction(this)" >15 Sagnika Chatterjee</div>
+<div class="it" style="background-color:rgb(102, 204, 255);" onclick="myFunction(this)" >16 Samay sarkar </div>
+<div class="it" style="background-color:rgb(102, 204, 255);" onclick="myFunction(this)" >17 Sandipan Singha</div>
+<div class="it" style="background-color:rgb(102, 204, 255);" onclick="myFunction(this)" >18 Sanjit Saha</div>
+<div class="it" style="background-color:rgb(102, 204, 255);" onclick="myFunction(this)" >19 Sarita Khatun Mollah</div>
+<div class="it" style="background-color:rgb(102, 204, 255);" onclick="myFunction(this)" >20 Soumyaneel Sarkar </div>
+<div class="it" style="background-color:rgb(102, 204, 255);" onclick="myFunction(this)" >21 Sourima Saha</div>
+<div class="it" style="background-color:rgb(102, 204, 255);" onclick="myFunction(this)" >22 Subhadeep Sarkar</div>
+<div class="it" style="background-color:rgb(102, 204, 255);" onclick="myFunction(this)" >23 Subhamay Nath</div>
+<div class="it" style="background-color:rgb(102, 204, 255);" onclick="myFunction(this)" >24 Sujoy Sen</div>
+<div class="it" style="background-color:rgb(102, 204, 255);" onclick="myFunction(this)" >25 Suman Pal</div>
+<div class="it" style="background-color:rgb(102, 204, 255);" onclick="myFunction(this)" >26 Suparna Majumder</div>
+<div class="it" style="background-color:rgb(102, 204, 255);" onclick="myFunction(this)" >27 Trinanjan Daw</div>
+<div class="it" style="background-color:rgb(102, 204, 255);" onclick="myFunction(this)" >28 Umar Faruk</div>
+<div class="it" style="background-color:rgb(102, 204, 255);" onclick="myFunction(this)" >29 Sandipan Majumder</div>
+<div class="it" style="background-color:rgb(102, 204, 255);" onclick="myFunction(this)" >30 Safiullah sk</div>
+<div class="it" style="background-color:rgb(102, 204, 255);" onclick="myFunction(this)" >31 </div>
+<div class="it" style="background-color:rgb(102, 204, 255);" onclick="myFunction(this)" >32 Barna Kumar Karmakar</div>
+<br>
+<button onclick="my()" style="height:40px;width:45%;background-color:#0080ff;color:#ffffff;border-radius:10px;position:absolute;left:10px;">CREATE LIST</button>
+<button onclick="reset()" style="height:40px;width:45%;background-color:#0080ff;color:#ffffff;border-radius:10px;position:absolute;right:10px;">RESET</button>
+</div>
+
+<br><br><br>
+<br><br><br>
+<button style="height:30px;width:70px;background-color:#00aaff;color:#ffffff" onclick="mycopy()">COPY</button>
+<button style="margin-left:25px;height:30px;width:70px;background-color: #1d6f42;color:#ffffff" onclick="getExcel()" id="excel" >EXCEL</button>
+<button style="margin-left:25px;height:30px;width:70px;background-color: #ff3333;color:#ffffff" onclick="myclear()">CLEAR</button>
+<br>
+
+<textarea id="myDIV2" style="resize: none;" cols="40" spellcheck="false">
+Today's Attendance</textarea>
+</body>
+</html> 
