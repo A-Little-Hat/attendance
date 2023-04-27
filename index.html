@@ -22,22 +22,28 @@ function myFunction(e){
 
 function my(){
   var x = document.querySelectorAll("div.it");
+  let className = document.getElementById("className").value
   var i,k=document.getElementById("myDIV2").rows;
   var v = document.getElementById("myDIV2").innerHTML;
-  for(i=0;i<x.length;i++){
-    var t = x[i].style.backgroundColor;
-     if(t == "deeppink"){
-       x[i].style.backgroundColor="rgb(102, 204, 255)";
-       x[i].style.color="#ffffff";
-       var nm = x[i].innerHTML;
-       if(v.search(nm) == -1 ){
-         v=v+"\n"+x[i].innerHTML;
-         k++;
+  if(!className){
+    alert("Enter Class Name")
+  }else{
+    v=v+" for "+className
+    for(i=0;i<x.length;i++){
+      var t = x[i].style.backgroundColor;
+       if(t == "deeppink"){
+         x[i].style.backgroundColor="rgb(102, 204, 255)";
+         x[i].style.color="#ffffff";
+         var nm = x[i].innerHTML;
+         if(v.search(nm) == -1 ){
+           v=v+"\n"+x[i].innerHTML;
+           k++;
+         }
        }
-     }
-     
-    document.getElementById("myDIV2").rows=k;
-    document.getElementById("myDIV2").innerHTML =v;
+       
+      document.getElementById("myDIV2").rows=k;
+      document.getElementById("myDIV2").innerHTML =v;
+  }
     
   }
 }
@@ -51,6 +57,13 @@ function mycopy(){
 
 const getExcel = ()=>{
   var copyText = document.getElementById("myDIV2").innerHTML;
+  let className = document.getElementById("className").value
+  let today= new Date().toLocaleDateString('en-in',{
+    month:"short",
+    day:"numeric"
+  })
+  let fileName = `${className} ${today}`
+  fileName=fileName.replace(/ /g,"_")
   var detailsArray = copyText.split('\n');
   if(detailsArray.length>1){
     var csv = detailsArray.map(function(d){
@@ -59,7 +72,7 @@ const getExcel = ()=>{
     const data = encodeURI('data:text/csv;charset=utf-8,' + csv);
     const link = document.createElement('a');
     link.setAttribute('href', data);
-    link.setAttribute('download', 'Attendance.csv');
+    link.setAttribute('download', `${fileName}.csv`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -103,7 +116,9 @@ margin-bottom:5px;
 </head>
 
 <body>
-
+  <label for="className">Class Name : </label>
+  <input type="text" id="className" placeholder="Enter Class Name" > 
+  <br><br>
 <div id="myDIV">
 <div class="it" style="background-color:rgb(102, 204, 255);" onclick="myFunction(this)" >1 Akshay Kumar Das</div>
 <div class="it" style="background-color:rgb(102, 204, 255);" onclick="myFunction(this)" >2 Aniket Sarkar</div>
@@ -112,7 +127,7 @@ margin-bottom:5px;
 <div class="it" style="background-color:rgb(102, 204, 255);" onclick="myFunction(this)" >5 Arijit Bose</div>
 <div class="it" style="background-color:rgb(102, 204, 255);" onclick="myFunction(this)" >6 Arunava Das</div>
 <div class="it" style="background-color:rgb(102, 204, 255);" onclick="myFunction(this)" >7 Baishakhi Boral</div>
-<div class="it" style="background-color:rgb(102, 204, 255);" onclick="myFunction(this)" >8 Barsha Manna</div>
+<div class="it" style="background-color:rgb(102, 204, 255);" onclick="myFunction(this)" >8</div>
 <div class="it" style="background-color:rgb(102, 204, 255);" onclick="myFunction(this)" >9 Bishal Ghosh</div>
 <div class="it" style="background-color:rgb(102, 204, 255);" onclick="myFunction(this)" >10 Biswayan Nandi</div>
 <div class="it" style="background-color:rgb(102, 204, 255);" onclick="myFunction(this)" >11 Pallavi Paul</div>
@@ -149,7 +164,8 @@ margin-bottom:5px;
 <button style="margin-left:25px;height:30px;width:70px;background-color: #ff3333;color:#ffffff" onclick="myclear()">CLEAR</button>
 <br>
 
-<textarea id="myDIV2" style="resize: none;" cols="40" spellcheck="false">
-Today's Attendance</textarea>
+<br><br>
+
+<textarea id="myDIV2" style="resize: none;" cols="40" spellcheck="false">Today's Attendance</textarea>
 </body>
 </html> 
